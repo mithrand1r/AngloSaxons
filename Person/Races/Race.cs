@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Person
+namespace People
 {
-    public class Class1
+    public abstract class Race
     {
+        string Name;
+        public abstract double Height(int Age);
     }
 }
