@@ -8,7 +8,7 @@ namespace People
 {
     class Saxon : Race
     {
-        public String Name = "Saxon";
+        public override String Name { get { return "Saxon"; } }
         public override double Height(int Age)
         {
             return 1.5 + (Age * 0.45);

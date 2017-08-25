@@ -12,7 +12,7 @@ namespace People.Tests
     public class PeopleManipulationTests
     {
         [TestMethod()]
-        public void InitPeople_1000()
+        public void InitPeople_10000()
         {
             //Arrange
 
@@ -20,7 +20,7 @@ namespace People.Tests
             List<Person> Result = PeopleManipulation.InitPeople();
 
             //Assert
-            Assert.AreEqual(Result.Count,1000);
+            Assert.AreEqual(Result.Count,10000);
         }
 
         [TestMethod()]
@@ -32,7 +32,7 @@ namespace People.Tests
             List<Person> persons = PeopleManipulation.InitPeople();
 
             //Assert
-            Assert.AreEqual(persons.Count(p => p.Name.StartsWith("Person ")), 1000);
+            Assert.AreEqual(persons.Count(p => p.Name.StartsWith("Person ")), 10000);
         }
 
 
@@ -45,7 +45,36 @@ namespace People.Tests
             List<Person> persons = PeopleManipulation.InitPeople();
 
             //Assert
-            Assert.AreEqual(persons.Count(p => p.Age>0 && p.Age<100), 1000);
+            Assert.AreEqual(persons.Count(p => p.Age>0 && p.Age<100), 10000);
+        }
+
+
+        [TestMethod()]
+        public void InitPeople_AllRacesRepresented()
+        {
+            //Arrange
+
+            //Act
+            List<Person> persons = PeopleManipulation.InitPeople();
+
+            //Assert
+            Assert.AreEqual(true, persons.Count(p => p.Race.Name == "Angle") > 0,"No Angles found");
+            Assert.AreEqual(true, persons.Count(p => p.Race.Name == "Saxon") > 0, "No Saxons found");
+            Assert.AreEqual(true, persons.Count(p => p.Race.Name == "Jute") > 0, "No Jutes found");
+            Assert.AreEqual(true, persons.Count(p => p.Race.Name == "Asian") > 0,"No Asians found");
+        }
+
+        [TestMethod()]
+        public void InitPeople_NoEmptyRaces()
+        {
+            //Arrange
+
+            //Act
+            List<Person> persons = PeopleManipulation.InitPeople();
+
+            //Assert
+            //No empty races allowed
+            Assert.AreEqual(true, persons.Count(p => p.Race == null) == 0);
         }
 
     }

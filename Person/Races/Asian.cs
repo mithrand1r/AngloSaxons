@@ -8,7 +8,8 @@ namespace People
 {
     class Asian : Race
     {
-        public String Name = "Asian";
+        public override String Name { get { return "Asian"; }}
+
         public override double Height(int Age)
         {
             return 1.7 + ((Age + 2)  * 0.23);

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+delegate double HeightCalculation(int Age);
 
 namespace People
 {
     public abstract class Race
     {
-        string Name;
+        public abstract string Name { get;}
         public abstract double Height(int Age);
     }
 }
