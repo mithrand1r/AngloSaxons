@@ -40,14 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Races\Saxon.cs" />
-    <Compile Include="Races\Jute.cs" />
-    <Compile Include="Races\Asian.cs" />
-    <Compile Include="Races\Angle.cs" />
-    <Compile Include="PeopleManipulation.cs" />
+    <Compile Include="HeightCalculation.cs" />
     <Compile Include="Person.cs" />
+    <Compile Include="Race.cs" />
+    <Compile Include="RealPersonFactory.cs" />
+    <Compile Include="PersonFactory.cs" />
+    <Compile Include="PeopleManipulation.cs" />
+    <Compile Include="RealPerson.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Races\Race.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -17,7 +17,7 @@ namespace People.Tests
             //Arrange
 
             //Act
-            List<Person> Result = PeopleManipulation.InitPeople();
+            var Result = PeopleManipulation.InitPeople(new RealPersonFactory());
 
             //Assert
             Assert.AreEqual(Result.Count,10000);
@@ -29,7 +29,7 @@ namespace People.Tests
             //Arrange
 
             //Act
-            List<Person> persons = PeopleManipulation.InitPeople();
+            var persons = PeopleManipulation.InitPeople(new RealPersonFactory());
 
             //Assert
             Assert.AreEqual(persons.Count(p => p.Name.StartsWith("Person ")), 10000);
@@ -42,12 +42,13 @@ namespace People.Tests
             //Arrange
 
             //Act
-            List<Person> persons = PeopleManipulation.InitPeople();
+            var persons = PeopleManipulation.InitPeople(new RealPersonFactory());
 
             //Assert
             Assert.AreEqual(persons.Count(p => p.Age>0 && p.Age<100), 10000);
         }
 
+        
 
         [TestMethod()]
         public void InitPeople_AllRacesRepresented()
@@ -55,13 +56,13 @@ namespace People.Tests
             //Arrange
 
             //Act
-            List<Person> persons = PeopleManipulation.InitPeople();
+            var persons = PeopleManipulation.InitPeople(new RealPersonFactory());
 
             //Assert
-            Assert.AreEqual(true, persons.Count(p => p.Race.Name == "Angle") > 0,"No Angles found");
-            Assert.AreEqual(true, persons.Count(p => p.Race.Name == "Saxon") > 0, "No Saxons found");
-            Assert.AreEqual(true, persons.Count(p => p.Race.Name == "Jute") > 0, "No Jutes found");
-            Assert.AreEqual(true, persons.Count(p => p.Race.Name == "Asian") > 0,"No Asians found");
+            Assert.AreEqual(true, persons.Count(p => p.Race == "Angle") > 0,"No Angles found");
+            Assert.AreEqual(true, persons.Count(p => p.Race == "Saxon") > 0, "No Saxons found");
+            Assert.AreEqual(true, persons.Count(p => p.Race == "Jute") > 0, "No Jutes found");
+            Assert.AreEqual(true, persons.Count(p => p.Race == "Asian") > 0,"No Asians found");
         }
 
         [TestMethod()]
@@ -70,7 +71,7 @@ namespace People.Tests
             //Arrange
 
             //Act
-            List<Person> persons = PeopleManipulation.InitPeople();
+            var persons = PeopleManipulation.InitPeople(new RealPersonFactory());
 
             //Assert
             //No empty races allowed

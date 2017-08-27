@@ -6,22 +6,12 @@ using System.Threading.Tasks;
 
 namespace People
 {
-    public class Person
+    public abstract class Person
     {
-
-        public string Name { get; set; }
-        public int Age { get; set; }
-        public Race Race { get; set; }
-        public override string ToString()
-        {
-            return String.Format("My name is {0} and I am {1} years", Name, Age);
-        }
-
-        public double height{
-            get
-            {
-                return Race.Height(Age);
-            }
-        }
+        public abstract string Name { get;}
+        public abstract int Age { get; }
+        public abstract string Race { get; }
+        public abstract override string ToString();
+        public abstract double Height { get; }
     }
 }

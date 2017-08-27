@@ -9,15 +9,13 @@ using System.Threading.Tasks;
 namespace People.Tests
 {
     [TestClass()]
-    public class PersonTests
+    public class RealPersonTests
     {
         [TestMethod()]
         public void ToString_NameAndAgeFilled()
         {
             //Arrange
-            Person TestPerson = new Person();
-            TestPerson.Name = "Henk";
-            TestPerson.Age = 10;
+            var TestPerson = new RealPerson("Henk",10);
 
             //Act
             String Result = TestPerson.ToString();
@@ -30,15 +28,28 @@ namespace People.Tests
         public void ToString_AgeEmpty()
         {
             //Arrange
-            Person TestPerson = new Person();
-            TestPerson.Name = "Henk";
+            var TestPerson = new RealPerson("Henk");
 
             //Act
             String Result = TestPerson.ToString();
 
             //Assert
-            Assert.AreEqual("My name is Henk and I am 0 years", Result);
+            Assert.AreEqual("My name is Henk and I am 30 years", Result);
         }
+
+        [TestMethod()]
+        public void ToString_RaceEmpty()
+        {
+            //Arrange
+            var TestPerson = new RealPerson("Henk",10);
+
+            //Act
+            String Result = TestPerson.Race;
+
+            //Assert
+            Assert.AreEqual("Caucasian", Result);
+        }
+
 
     }
 }

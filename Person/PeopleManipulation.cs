@@ -8,36 +8,33 @@ namespace People
 {
     public static class PeopleManipulation
     {
-        public static List<Person> InitPeople()
+        public static List<Person> InitPeople(PersonFactory factory)
         {
-            List<Person> People = new List<Person>();
-            Random rnd = new Random();
+            var people = new List<Person>();
+
+            var rnd = new Random();
+
             for (int i = 0; i < 10000; i++)
             {
-                People.Add(new Person()
-                {
-                    Name = "Person #" + i.ToString(),
-                    Age = rnd.Next(1, 99),
-                    Race = RandomRace(i)
-                });
+                people.Add(factory.GetPerson(
+                    name: "Person #" + i.ToString(),
+                    age: rnd.Next(1, 99),
+                    race: RandomRace(i)
+                ));
             }
-            return People;
+
+            return people;
         }
 
-        private static Race RandomRace(int Seed)
+        private static string RandomRace(int Seed)
         {
-            Random rnd = new Random(Seed);
-            int Race = rnd.Next(1, 5);
-            switch (Race) {
-                case 1:
-                    return new Angle();
-                case 2:
-                    return new Saxon();
-                case 3:
-                    return new Jute();
-                default:
-                    return new Asian();
-            }
+            var raceNames = new List<string>() { "Angle", "Saxon", "Jute", "Asian" };
+
+            var rnd = new Random(Seed);
+
+            int id = rnd.Next(0, 4);
+
+            return raceNames[id];
         }
     }
       
