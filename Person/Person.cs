@@ -13,5 +13,6 @@ namespace People
         public abstract string Race { get; }
         public abstract override string ToString();
         public abstract double Height { get; }
+        public abstract void AddYearsToAge(int years);
     }
 }

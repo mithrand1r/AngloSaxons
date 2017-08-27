@@ -20,7 +20,7 @@ namespace People.Tests
             var Result = PeopleManipulation.InitPeople(new RealPersonFactory());
 
             //Assert
-            Assert.AreEqual(Result.Count,10000);
+            Assert.AreEqual(Result.Count, 10000);
         }
 
         [TestMethod()]
@@ -45,10 +45,10 @@ namespace People.Tests
             var persons = PeopleManipulation.InitPeople(new RealPersonFactory());
 
             //Assert
-            Assert.AreEqual(persons.Count(p => p.Age>0 && p.Age<100), 10000);
+            Assert.AreEqual(persons.Count(p => p.Age > 0 && p.Age < 100), 10000);
         }
 
-        
+
 
         [TestMethod()]
         public void InitPeople_AllRacesRepresented()
@@ -59,10 +59,10 @@ namespace People.Tests
             var persons = PeopleManipulation.InitPeople(new RealPersonFactory());
 
             //Assert
-            Assert.AreEqual(true, persons.Count(p => p.Race == "Angle") > 0,"No Angles found");
+            Assert.AreEqual(true, persons.Count(p => p.Race == "Angle") > 0, "No Angles found");
             Assert.AreEqual(true, persons.Count(p => p.Race == "Saxon") > 0, "No Saxons found");
             Assert.AreEqual(true, persons.Count(p => p.Race == "Jute") > 0, "No Jutes found");
-            Assert.AreEqual(true, persons.Count(p => p.Race == "Asian") > 0,"No Asians found");
+            Assert.AreEqual(true, persons.Count(p => p.Race == "Asian") > 0, "No Asians found");
         }
 
         [TestMethod()]
@@ -78,5 +78,21 @@ namespace People.Tests
             Assert.AreEqual(true, persons.Count(p => p.Race == null) == 0);
         }
 
+        [TestMethod()]
+        public void AddYearsToEveryonesAgeTest()
+        {
+            
+            var People = PeopleManipulation.InitPeople(new RealPersonFactory());
+            int oldAges = People.Sum(p => p.Age);
+            int newAges;
+
+            PeopleManipulation.AddYearsToEveryonesAge(People,1);
+
+            newAges = People.Sum(p => p.Age);
+
+            // added 1 year to all people
+            Assert.AreEqual(People.Count, newAges - oldAges);
+
+        }
     }
 }

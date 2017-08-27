@@ -31,5 +31,17 @@ namespace People
         {
             get { return _race.Height(Age);}
         }
+        public override void AddYearsToAge(int years)
+        {
+            if (years < 0) {
+                return;
+            }
+            if (_age + years > 100)
+            {
+                return;
+            }
+
+            _age += years;
+        }
     }
 }

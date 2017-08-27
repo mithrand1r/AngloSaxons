@@ -20,10 +20,10 @@ namespace People
             Parallel.For(0, degreeOfParallelism, workerId =>
             {
                 int startPos        = workerId * recordsPerThread;
-                var threadPeople    = new List<Person>();
                 int endPos          = startPos + recordsPerThread;
+                var threadPeople    = new List<Person>();
 
-                for (int i = startPos; i < endPos; i++)
+                for (var i = startPos; i < endPos; i++)
                 {
                     threadPeople.Add(factory.GetPerson(
                         name: "Person #" + i.ToString(),
@@ -34,9 +34,35 @@ namespace People
                 lock(people) { 
                     people.AddRange(threadPeople);
                 }
-
             });
+
             return people;
+        }
+
+        public static void AddYearsToEveryonesAge(List<Person> people, int year)
+        {
+
+            int degreeOfParallelism = Environment.ProcessorCount;
+            int recordsPerThread = people.Count / degreeOfParallelism;
+
+            Parallel.For(0, degreeOfParallelism, workerId =>
+             {
+                 int startPos = workerId * recordsPerThread;
+                 int endPos = startPos + recordsPerThread;
+
+                 for (var i = startPos; i < endPos; i++)
+                 {
+                     //no locking as records will not be accessed across threads
+                     people[i].AddYearsToAge(year);
+                 }
+             }
+            );
+            // //just as fast but not parallel....
+            //foreach(Person person in people)
+            //{
+            //    person.AddYearsToAge(year);
+            //}    
+
         }
 
         private static string RandomRace(int Seed)
