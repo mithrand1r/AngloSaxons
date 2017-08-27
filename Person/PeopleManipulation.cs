@@ -10,19 +10,32 @@ namespace People
     {
         public static List<Person> InitPeople(PersonFactory factory)
         {
-            var people = new List<Person>();
+            var people      = new List<Person>();
+            var rnd         = new Random();
+            int totalPeople = 10000;
 
-            var rnd = new Random();
+            int degreeOfParallelism = Environment.ProcessorCount;
+            int recordsPerThread = totalPeople / degreeOfParallelism;
 
-            for (int i = 0; i < 10000; i++)
+            Parallel.For(0, degreeOfParallelism, workerId =>
             {
-                people.Add(factory.GetPerson(
-                    name: "Person #" + i.ToString(),
-                    age: rnd.Next(1, 99),
-                    race: RandomRace(i)
-                ));
-            }
+                int startPos        = workerId * recordsPerThread;
+                var threadPeople    = new List<Person>();
+                int endPos          = startPos + recordsPerThread;
 
+                for (int i = startPos; i < endPos; i++)
+                {
+                    threadPeople.Add(factory.GetPerson(
+                        name: "Person #" + i.ToString(),
+                        age: rnd.Next(1, 99),
+                        race: RandomRace(i)
+                    ));
+                }
+                lock(people) { 
+                    people.AddRange(threadPeople);
+                }
+
+            });
             return people;
         }
 
